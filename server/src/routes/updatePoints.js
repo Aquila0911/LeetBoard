@@ -19,4 +19,15 @@ router.post("/api/points", async (req, res) => {
   }
 });
 
+// GET endpoint to fetch all points
+router.get("/api/points", async (req, res) => {
+  try {
+    const points = await Points.find({});
+    res.status(200).json(points);
+  } catch (error) {
+    console.error("Error fetching points:", error);
+    res.status(500).json({ error: "Failed to fetch points data" });
+  }
+});
+
 module.exports = router;

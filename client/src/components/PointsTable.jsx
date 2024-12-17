@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UpdateButton from "./UpdateButton";
 
 export default function PointsTable() {
   const [tableData, setTableData] = useState([
-    ["", "Lava", "Aru", "Saea", "Aqui"],
+    ["", "", "", "", ""],
     ["Easy", 0, 0, 0, 0],
     ["Medium", 0, 0, 0, 0],
     ["Hard", 0, 0, 0, 0],
     ["Points", 0, 0, 0, 0],
   ]);
+
+  useEffect(() => {
+    // Fetch data from backend when component mounts
+    axios.get("/api/points")
+      .then(response => {
+        const pointsData = response.data;
+        const updatedTableData = [...tableData];
+
+        pointsData.forEach((userData, index) => {
+          const colIndex = index + 1;
+          updatedTableData[0][colIndex] = userData.user;
+          updatedTableData[1][colIndex] = userData.easy;
+          updatedTableData[2][colIndex] = userData.medium;
+          updatedTableData[3][colIndex] = userData.hard;
+          updatedTableData[4][colIndex] = userData.total;
+        });
+
+        setTableData(updatedTableData);
+      })
+      .catch(error => {
+        console.error("Error fetching points data:", error);
+      });
+  }, []);
 
   const handleSave = () => {
     // Send data for each user column
