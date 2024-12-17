@@ -6,14 +6,15 @@ const cors = require("cors");
 const connectDB = require("./src/config/db.js");
 const pointsRoute = require("./src/routes/updatePoints.js")
 
-const allowedOrigins = ["https://leet-board-gamma.vercel.app"];
+// const allowedOrigins = ["https://leet-board-gamma.vercel.app"];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"], // Add methods you need
-  })
-);
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
+app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
