@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import UpdateButton from "./UpdateButton";
+import axiosInstance from "../utils/axiosInstance";
 
 export default function PointsTable() {
   const [tableData, setTableData] = useState([
@@ -13,7 +14,7 @@ export default function PointsTable() {
 
   useEffect(() => {
     // Fetch data from backend when component mounts
-    axios.get("/api/points")
+    axiosInstance.get("/api/points")
       .then(response => {
         const pointsData = response.data;
         const updatedTableData = [...tableData];
@@ -45,7 +46,7 @@ export default function PointsTable() {
         total: tableData[4][colIndex],
       };
 
-      axios
+      axiosInstance
         .post("/api/points", userData)
         .then((response) => console.log("Saved:", response.data))
         .catch((error) => console.error("Error:", error));

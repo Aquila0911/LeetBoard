@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import MainPage from "./components/MainPage";
 import TypingAnimation from "./components/TypingAnimation";
+import axiosInstance from "./utils/axiosInstance";
 // import "./styles/transitions.css"
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
 
   // Backend test
   useEffect(() => {
-    axios
+    axiosInstance
       .get("/api/test")
       .then((response) => {
         // setBackendData(response.data);
