@@ -1,15 +1,15 @@
+// Setup
 const express = require("express");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const connectDB = require("./src/config/db.js");
 const pointsRoute = require("./src/routes/updatePoints.js")
 
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB
 connectDB();
