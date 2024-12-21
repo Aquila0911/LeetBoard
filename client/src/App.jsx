@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
 import MainPage from "./components/MainPage";
 import TypingAnimation from "./components/TypingAnimation";
 import axiosInstance from "./utils/axiosInstance";
+import CustomAntdStyles from "./styles/CustomAntdStyles";
+import { App as AntAapp } from "antd";
 // import "./styles/transitions.css"
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
       .get("/api/test")
       .then((response) => {
         // setBackendData(response.data);
-        console.log("data:", response.data)
+        console.log("data:", response.data);
       })
       .catch((error) => {
         console.error("There was an error making the request!", error);
@@ -45,22 +46,26 @@ function App() {
 
   return (
     <>
-      <div onClick={handleClick}>
-        {stage === "landing" && <TypingAnimation />}
-        {stage === "transition" && (
-          <div className="flex justify-center items-center h-screen">
-            <h1 className="text-4xl font-default transition-all duration-1000 transform translate-y-[-calc(50vh-4rem)] text-[1.875rem] leading-[2.25rem]">
-              {finalString}
-            </h1>
+      <CustomAntdStyles>
+        <AntAapp>
+          <div onClick={handleClick}>
+            {stage === "landing" && <TypingAnimation />}
+            {stage === "transition" && (
+              <div className="flex justify-center items-center h-screen">
+                <h1 className="text-4xl font-default transition-all duration-1000 transform translate-y-[-calc(50vh-4rem)] text-[1.875rem] leading-[2.25rem]">
+                  {finalString}
+                </h1>
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      {stage === "main" && (
-        <div className="fade-in">
-          <MainPage finalString={finalString} />
-        </div>
-      )}
+          {stage === "main" && (
+            <div className="fade-in">
+              <MainPage finalString={finalString} />
+            </div>
+          )}
+        </AntAapp>
+      </CustomAntdStyles>
     </>
   );
 }

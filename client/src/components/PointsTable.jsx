@@ -112,7 +112,7 @@ export default function PointsTable() {
           ))}
         </tbody>
       </table>
-      <div className="mt-4">
+      <div className="mt-6">
         <UpdateButton onClick={handleSave}/>
       </div>
     </div>
